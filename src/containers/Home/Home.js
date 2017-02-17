@@ -1,37 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { loadEvents } from '../../actions/eventActions';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   events: Object.assign(
-    //     {},
-    //     this.props.events
-    //   ),
-    // };
+  componentDidMount() {
+    this.props.loadEvents();
   }
 
   render() {
-    return (
-      <div>Hello Home Test</div>
-    );
+    if (this.props.events) {
+      return (
+      <div>{this.props.events.map(event => <p key={event.id}>{event.title}</p>)}</div>
+      );
+    }
+    return null;
   }
 }
 
+Home.propTypes = {
+  events: React.PropTypes.array,
+  loadEvents: React.PropTypes.func.isRequired,
+};
 
-function mapStateToProps(state) {
-  console.log('state', state);
-  return {
-    events: state.events,
-  };
-}
+const mapStateToProps = state => ({
+  events: state.events.event,
+});
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(recipeActions, dispatch)
-//   };
-// }
+const mapDispatchToProps = {
+  loadEvents,
+};
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

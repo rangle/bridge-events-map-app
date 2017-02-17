@@ -8,14 +8,11 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { loadEvents } from './actions/eventActions';
-
 import routes from './store/routes';
 import configureStore from './store/configure-store';
 import './styles/index.css';
 
 const store = configureStore({});
-store.dispatch(loadEvents());
 const history = syncHistoryWithStore(browserHistory, store);
 
 

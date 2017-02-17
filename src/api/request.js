@@ -3,13 +3,13 @@ import 'whatwg-fetch';
 import { EVENTFUL_API_BASE_URL, EVENTFUL_API_KEY } from '../config/api';
 import { buildQueryString } from './helpers';
 
-function request(endpoint, method = 'GET', extraHeaders) {
+function request(endpoint, method = 'GET') {
   return fetch(`${EVENTFUL_API_BASE_URL}/${endpoint}`, {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...extraHeaders,
-    },
+    // headers: {
+    //   'Content-Type': 'application/json',
+    //   ...extraHeaders,
+    // },
   }).then(response => response.json());
 }
 

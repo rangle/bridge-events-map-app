@@ -42,6 +42,11 @@ module.exports = {
     historyApiFallback: { index: '/' },
     proxy: Object.assign({}, { '/api/*': 'http://localhost:3000' }),
     inline: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+    },
   },
 
   module: {
