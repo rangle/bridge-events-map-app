@@ -12,7 +12,8 @@ class EventDetails extends Component {
     return (
       <div>
         THIS IS WHERE THE DETAILS GO
-        {this.props.details.city}
+        <h1> Title: {this.props.details.title} </h1>
+        <p> City: {this.props.details.city} </p>
       </div>
     );
   }
@@ -23,6 +24,7 @@ EventDetails.propTypes = {
   loadEventDetails: React.PropTypes.func,
   details: React.PropTypes.shape({
     city: React.PropTypes.string,
+    title: React.PropTypes.string,
   }),
 };
 

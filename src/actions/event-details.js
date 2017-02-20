@@ -4,7 +4,7 @@ import {get} from '../api/request';
 
 function getEvent(details) {
   return {
-    type: types.ACTION_TYPES.LOAD_EVENTS_DETAILS,
+    type: types.ACTION_TYPES.LOAD_EVENT_DETAILS,
     payload: {
       details,
     },
