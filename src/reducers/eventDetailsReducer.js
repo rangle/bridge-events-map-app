@@ -1,6 +1,6 @@
 import * as types from '../actions/actionTypes';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
 
   case types.ACTION_TYPES.LOAD_EVENT_DETAILS:
