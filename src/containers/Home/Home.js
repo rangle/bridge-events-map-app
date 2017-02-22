@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { loadEvents } from '../../actions/eventActions';
 import EventsMap from '../../components/EventsMap/EventsMap';
 import EventsList from '../../components/EventsList/EventsList';
-// import MapTest from '../../components/MapTest/MapTest';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -14,10 +13,8 @@ class Home extends React.Component {
     if (this.props.events) {
       return (
         <div>
-        <EventsMap events={this.props.events}/>
+        <EventsMap markers={this.props.markers}/>
         <EventsList events={this.props.events} />
-        {/* <MapTest events={this.props.events}/> */}
-        {/* <EventsMap events={this.props.events}/> */}
       </div>
       );
     }
@@ -27,12 +24,35 @@ class Home extends React.Component {
 
 Home.propTypes = {
   events: React.PropTypes.array,
+  markers: React.PropTypes.array,
   loadEvents: React.PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  events: state.events.event,
-});
+const getFormattedMarkers = (events) => {
+  const markers = events.map((event, index)=> {
+    return {
+      position: {
+        lat: Number(event.latitude),
+        lng: Number(event.longitude),
+      },
+      key: index,
+      defaultAnimation: 2,
+    };
+  });
+  return markers;
+};
+
+const mapStateToProps = state => {
+  let formattedEvents = [];
+  if (Object.keys(state.events).length !== 0 && state.events.constructor === Object) {
+    formattedEvents = getFormattedMarkers(state.events.event);
+  }
+
+  return {
+    events: state.events.event,
+    markers: formattedEvents,
+  };
+};
 
 const mapDispatchToProps = {
   loadEvents,
