@@ -5,6 +5,6 @@ import EventDetails from '../containers/EventDetails/EventDetails';
 export default (
   <Router history={hashHistory}>
     <Route path="/" component={ App }/>
-    <Route path="/EventDetails" component={ EventDetails } />
+    <Route name="EventDetails" path="EventDetails/:id" component={ EventDetails } />
   </Router>
 );

@@ -11,11 +11,10 @@ function getEvent(details) {
   };
 }
 
-export function loadEventDetails() {
-  return function loadEventDetailsPlz(dispatch) {
-    get('events/get', { id: 'E0-001-000278174-6' })
-      .then(function getResp(response) {
-        console.log(response);
+export function loadEventDetails(idParam) {
+  return dispatch => {
+    get('events/get', { id: idParam })
+      .then(response => {
         dispatch(getEvent(response));
       }).catch(error => {
         throw (error);
