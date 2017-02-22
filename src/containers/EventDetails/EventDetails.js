@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { loadEventDetails } from '../../actions/eventDetailsActions';
+import EventDetailsComponent from '../../components/EventDetails/EventDetailsComponent';
 
 class EventDetails extends Component {
 
   componentDidMount() {
-    this.props.loadEventDetails();
+    // Put ID into the action
+    this.props.loadEventDetails(this.props.params.id);
   }
 
   render() {
-    return (
-      <div>
-        THIS IS WHERE THE DETAILS GO
-        <h1> Title: {this.props.details.title} </h1>
-        <p> City: {this.props.details.city} </p>
-      </div>
-    );
+    if (this.props.details) {
+      return (
+        <div>
+          <EventDetailsComponent title={this.props.details.title}
+            city={this.props.details.city} />
+        </div>
+      );
+    }
+    return null;
   }
-
 }
 
 EventDetails.propTypes = {
+  params: React.PropTypes.shape({
+    id: React.PropTypes.string,
+  }),
   loadEventDetails: React.PropTypes.func,
   details: React.PropTypes.shape({
     city: React.PropTypes.string,
