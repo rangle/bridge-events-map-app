@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { loadEvents } from '../../actions/eventActions';
 import EventsMap from '../../components/EventsMap/EventsMap';
+import EventsList from '../../components/EventsList/EventsList';
 // import MapTest from '../../components/MapTest/MapTest';
 
 class Home extends React.Component {
@@ -14,6 +15,7 @@ class Home extends React.Component {
       return (
         <div>
         <EventsMap events={this.props.events}/>
+        <EventsList events={this.props.events} />
         {/* <MapTest events={this.props.events}/> */}
         {/* <EventsMap events={this.props.events}/> */}
       </div>
