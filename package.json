@@ -122,5 +122,8 @@
   },
   "bugs": {
     "url": "https://github.com/rangle/rangle-starter/issues"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
   }
 }

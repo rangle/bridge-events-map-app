@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import {get} from '../api/request';
 import { loadEvents } from './eventActions';
 
-function getEvent(details) {
+export function getEvent(details) {
   return {
     type: types.ACTION_TYPES.LOAD_EVENT_DETAILS,
     payload: {
