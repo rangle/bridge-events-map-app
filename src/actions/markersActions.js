@@ -22,6 +22,7 @@ export function getMarkersList(events) {
         defaultAnimation: 2,
         showInfo: false,
         title: event.title,
+        id: event.id,
       };
     });
     dispatch(getFormattedMarkers(markers));

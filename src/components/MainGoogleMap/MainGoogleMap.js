@@ -1,4 +1,5 @@
 import { default as React } from 'react';
+import {Link} from 'react-router';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
 const MainGoogleMap = withGoogleMap(props => (
@@ -14,7 +15,9 @@ const MainGoogleMap = withGoogleMap(props => (
         >
           {marker.showInfo && (
           <InfoWindow onCloseClick={() => props.onMarkerClick(marker.key, false)}>
-            <div>{marker.title}</div>
+            <Link to={'/EventDetails/' + marker.id}>
+              <div>{marker.title}</div>
+            </Link>
           </InfoWindow>
           )}
       </Marker>
