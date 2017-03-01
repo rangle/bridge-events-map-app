@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { loadEventDetails } from '../../actions/eventDetailsActions';
+import { loadEvents } from '../../actions/eventActions';
 import RecommendedEvents from '../../components/RecommendedEvents/RecommendedEvents';
 import EventDetailsComponent from '../../components/EventDetails/EventDetailsComponent';
 
@@ -18,6 +19,14 @@ class EventDetails extends Component {
     const nextAccountId = nextProps.params.id;
     if (nextAccountId !== this.props.params.id) {
       this.props.loadEventDetails(nextProps.params.id);
+    }
+    if (this.props.details !== nextProps.details) {
+      this.props.loadEvents({
+        location: nextProps.details.city,
+        page_size: 3,
+        category: nextProps.details.categories.category[0].id,
+        venue_id: nextProps.details.venue_id,
+      });
     }
   }
 
@@ -46,10 +55,13 @@ EventDetails.propTypes = {
     id: React.PropTypes.string,
   }),
   loadEventDetails: React.PropTypes.func,
+  loadEvents: React.PropTypes.func,
   loadRecommendedEvents: React.PropTypes.func,
   details: React.PropTypes.shape({
     city: React.PropTypes.string,
     title: React.PropTypes.string,
+    categories: React.PropTypes.obj,
+    venue_id: React.PropTypes.string,
   }),
   events: React.PropTypes.array,
 };
@@ -60,6 +72,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  loadEvents,
   loadEventDetails,
 };
 
