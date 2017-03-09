@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
+import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-arrow-left.js';
 
 // Event details
 import EventDetailsComponent from '../../components/EventDetails/EventDetailsComponent';
@@ -51,8 +53,16 @@ class EventDetails extends Component {
     const { commentForm } = this.props;
     const handleCommentSubmit = e => {
       e.preventDefault();
-      this.props.addComment(commentForm.values.commentTextarea);
-      commentForm.values.commentTextarea = '';
+      if (commentForm.values) {
+        const d = new Date();
+        const day = d.getDate();
+        const monthIndex = d.getMonth();
+        const year = d.getFullYear();
+        const foormattedDate = monthIndex + '/' + day + '/' + year;
+        commentForm.values.date = foormattedDate;
+        this.props.addComment(commentForm.values);
+      }
+      commentForm.values = '';
     };
     if (this.props.details.latitude) {
       const eventPosition = {
@@ -71,6 +81,10 @@ class EventDetails extends Component {
         <div>
           <div style={styles.menubar}/>
           <div style={styles.container}>
+            <Link style={{textDecoration: 'none', color: '#BDBDBD', display: 'block', marginTop: '20px', position: 'relative'}} to={'/'}>
+             <KeyboardBackspace style={{color: '#BDBDBD', position: 'absolute', left: '-22px', top: '-3px'}}/>
+             <span style={{paddingTop: '-5px'}}>Events List</span>
+            </Link>
             <EventDetailsComponent
               title={this.props.details.title}
               city={this.props.details.city}
@@ -90,7 +104,7 @@ class EventDetails extends Component {
             </div>
             <div style={styles.hr} />
             <div style={styles.comments}>
-              <CommentForm handleAddComment={ handleCommentSubmit }/>
+              <CommentForm handleAddComment={handleCommentSubmit}/>
               <CommentList comments={this.props.comments}/>
             </div>
             <div style={styles.hr} />
